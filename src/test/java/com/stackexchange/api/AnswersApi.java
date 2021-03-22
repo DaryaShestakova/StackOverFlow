@@ -1,19 +1,17 @@
 package com.stackexchange.api;
 
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
 
 @Getter
-@SuperBuilder
 public class AnswersApi extends BaseApi {
 
-    protected final String RESOURCE = "answers";
+    private static final String RESOURCE = "answers";
 
-    public String buildEndpoint() {
-        return BASE_API +
-                "/" +
-                RESOURCE +
-                "?" +
-                baseParameters();
+    public AnswersApi(int page, int pageSize, String order, String sort, String filter) {
+        super(page, pageSize, order, sort, filter);
+    }
+
+    public String buildAnswersEndPoint(){
+        return buildEndPoint(RESOURCE);
     }
 }

@@ -3,7 +3,16 @@ package com.stackexchange.tests;
 import com.stackexchange.api.AnswersApi;
 import com.stackexchange.api.BadgesApi;
 import com.stackexchange.api.UsersApi;
+import com.stackexchange.entity.AnswersEntity.AnswersItem;
+import com.stackexchange.entity.AnswersEntity.AnswersOwner;
+import com.stackexchange.entity.AnswersEntity.AnswersRoot;
+import com.stackexchange.entity.BadgesEntity.BadgesItem;
+import com.stackexchange.entity.BadgesEntity.BadgesRoot;
+import com.stackexchange.entity.UsersEntity.UsersItem;
+import com.stackexchange.entity.UsersEntity.UsersRoot;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class StackExchangeTest extends BaseTest{
 
@@ -13,10 +22,17 @@ public class StackExchangeTest extends BaseTest{
 
     @Test
     public void testAnswersStackExchange(){
+        AnswersRoot answersRoot = getRoot(answersApi, AnswersRoot.class);
         softAssert.assertEquals(200, response.statusCode());
-        softAssert.assertTrue(answersRoot.getItemsSize() < 11);
-        softAssert.assertTrue(answersFieldsTest.checkAnswersFieldNotNull(answersRoot, "displayName"));
-        softAssert.assertTrue(answersFieldsTest.checkAnswersFieldNotNull(answersRoot, "userId"));
+        softAssert.assertTrue(answersRoot.getItemsSize() <= 10);
+
+        List<AnswersItem> items = answersRoot.getAnswersItems();
+        for (AnswersItem item : items){
+            AnswersOwner owner = item.getAnswersOwner();
+            softAssert.assertNotEquals(owner.getDisplayName(), null);
+            softAssert.assertNotEquals(owner.getUserId(), null);
+        }
+
         softAssert.assertAll();
     }
 
@@ -33,9 +49,14 @@ public class StackExchangeTest extends BaseTest{
 
     @Test
     public void testBadgesStackExchange(){
+        BadgesRoot badgesRoot = getRoot(badgesApi, BadgesRoot.class);
         softAssert.assertEquals(200, response.statusCode());//1
-        softAssert.assertTrue(badgesFieldsTest.checkBadgesFieldNotNull(badgesRoot, "awardCount"));//2
-        softAssert.assertTrue(badgesFieldsTest.checkBadgesFieldNotNull(badgesRoot, "rank"));//2
+
+        for (BadgesItem item : badgesRoot.getBadgesItems()){
+            softAssert.assertNotEquals(item.getAwardCount(), null);
+            softAssert.assertNotEquals(item.getRank(), null);
+        }
+
         softAssert.assertAll();
     }
 
@@ -67,8 +88,13 @@ public class StackExchangeTest extends BaseTest{
 
     @Test
     public void testUsersStackExchange(){
+        UsersRoot usersRoot = getRoot(usersApi, UsersRoot.class);
         softAssert.assertEquals(200, response.statusCode());//1
-        softAssert.assertTrue(usersFieldsTest.checkUsersFieldNotNull(usersRoot, "reputation"));//2
+
+        for (UsersItem item : usersRoot.getUsersItems()){
+            softAssert.assertNotEquals(item.getReputation(), null);
+        }
+
         softAssert.assertTrue(usersFieldsTest.checkUsersFieldDisplayNameContainsString(usersRoot, "kevin"));//3
         softAssert.assertTrue(usersFieldsTest.checkUsersFieldCreationDateBelongsToPeriodFromFilter(usersRoot, usersApi.getFromDate(), usersApi.getToDate()));//4
         softAssert.assertTrue(usersFieldsTest.checkUsersFieldReputationSortedFromLessToMore(usersRoot));//5

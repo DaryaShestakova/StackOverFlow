@@ -2,24 +2,13 @@ package com.stackexchange.tests.UsersStackExchangeTest;
 
 import com.stackexchange.entity.UsersEntity.UsersItem;
 import com.stackexchange.entity.UsersEntity.UsersRoot;
-import com.stackexchange.tests.FieldsTest;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class UsersFieldsTest extends FieldsTest {
-    public boolean checkUsersFieldNotNull(UsersRoot root, String fieldName){
-        boolean flag = true;
-        for (UsersItem item : root.getUsersItems()){
-            if (!objectHasProperty(item, fieldName)){
-                flag = false;
-                break;
-            }
-        }
-        return flag;
-    }
+public class UsersFieldsTest{
 
     public boolean checkUsersFieldDisplayNameContainsString(UsersRoot root, String someString){
         boolean flag = true;

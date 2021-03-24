@@ -17,10 +17,11 @@ public class UsersApi extends BaseApi{
         this.toDate = toDate;
     }
 
-    public String buildUsersEndPoint(){
-        return buildEndPoint(RESOURCE) +
-                "&inname=" + this.inName +
-                "&fromdate=" + this.fromDate +
-                "&todate=" + this.toDate;
+    @Override
+    public String buildEndPoint(){
+        return buildBaseEndPoint(RESOURCE) +
+                "&inname=" + inName +
+                "&fromdate=" + fromDate +
+                "&todate=" + toDate;
     }
 }

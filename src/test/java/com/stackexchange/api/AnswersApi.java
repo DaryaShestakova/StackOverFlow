@@ -11,7 +11,8 @@ public class AnswersApi extends BaseApi {
         super(page, pageSize, order, sort, filter);
     }
 
-    public String buildAnswersEndPoint(){
-        return buildEndPoint(RESOURCE);
+    @Override
+    public String buildEndPoint() {
+        return buildBaseEndPoint(RESOURCE);
     }
 }

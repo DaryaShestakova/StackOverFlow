@@ -3,8 +3,6 @@ package com.stackexchange.api;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import static com.stackexchange.api.UsersApi.RESOURCE;
-
 @Getter
 @AllArgsConstructor
 public abstract class BaseApi {
@@ -17,13 +15,15 @@ public abstract class BaseApi {
     protected String sort;
     protected String filter;
 
-    public String buildEndPoint(String resource){
-        return this.BASE_API + "/" + resource + "?" +
-                "site=" + this.site +
-                "&page=" + this.page +
-                "&pageSize=" + this.pageSize +
-                "&order=" + this.order +
-                "&sort=" + this.sort +
-                "&filter=" + this.filter;
+    public abstract String buildEndPoint();
+
+    public String buildBaseEndPoint(String resource){
+        return BASE_API + "/" + resource + "?" +
+                "site=" + site +
+                "&page=" + page +
+                "&pageSize=" + pageSize +
+                "&order=" + order +
+                "&sort=" + sort +
+                "&filter=" + filter;
     }
 }

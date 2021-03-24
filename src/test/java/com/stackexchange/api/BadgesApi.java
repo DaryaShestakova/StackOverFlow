@@ -10,7 +10,8 @@ public class BadgesApi extends BaseApi{
         super(page, pageSize, order, sort, filter);
     }
 
-    public String buildBadgesEndPoint(){
-        return buildEndPoint(RESOURCE);
+    @Override
+    public String buildEndPoint() {
+        return buildBaseEndPoint(RESOURCE);
     }
 }

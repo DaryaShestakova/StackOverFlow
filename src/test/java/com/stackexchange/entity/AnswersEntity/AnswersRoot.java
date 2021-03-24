@@ -3,22 +3,19 @@ package com.stackexchange.entity.AnswersEntity;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import com.stackexchange.entity.BaseRoot;
+import lombok.Getter;
 
-@Data
-@AllArgsConstructor
-@Builder
-public class AnswersRoot {
+@Getter
+public class AnswersRoot extends BaseRoot {
     @SerializedName("items")
     public List<AnswersItem> answersItems;
-    @SerializedName("has_more")
-    public boolean hasMore;
     @SerializedName("backoff")
     public int itemsSize;
-    @SerializedName("quota_max")
-    public int quotaMax;
-    @SerializedName("quota_remaining")
-    public int quotaRemaining;
+
+    public AnswersRoot(boolean hasMore, int quotaMax, int quotaRemaining, List<AnswersItem> answersItems, int itemsSize) {
+        super(hasMore, quotaMax, quotaRemaining);
+        this.answersItems = answersItems;
+        this.itemsSize = itemsSize;
+    }
 }

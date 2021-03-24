@@ -16,9 +16,9 @@ import java.util.List;
 
 public class StackExchangeTest extends BaseTest{
 
-    protected static AnswersApi answersApi = new AnswersApi(1,10,"desc", "activity", "default");
-    protected static BadgesApi badgesApi = new BadgesApi(1, 10, "desc", "rank", "default");
-    protected static UsersApi usersApi = new UsersApi(1, 10, "asc", "reputation", "default", "kevin", 1614556800, 1616198400);
+    private AnswersApi answersApi = new AnswersApi(1,10,"desc", "activity", "default");
+    private BadgesApi badgesApi = new BadgesApi(1, 10, "desc", "rank", "default");
+    private UsersApi usersApi = new UsersApi(1, 10, "asc", "reputation", "default", "kevin", 1614556800, 1616198400);
 
     @Test
     public void testAnswersStackExchange(){

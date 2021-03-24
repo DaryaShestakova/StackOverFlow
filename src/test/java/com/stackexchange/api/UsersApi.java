@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class UsersApi extends BaseApi{
 
-    protected static final String RESOURCE = "users";
+    private static final String RESOURCE = "users";
     private String inName;
     private long fromDate;
     private long toDate;

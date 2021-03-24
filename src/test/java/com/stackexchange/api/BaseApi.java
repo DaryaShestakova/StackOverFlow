@@ -9,11 +9,11 @@ public abstract class BaseApi {
 
     public final String BASE_API = "https://api.stackexchange.com/2.2";
     public final String site = "stackoverflow";
-    protected int page;
-    protected int pageSize;
-    protected String order;
-    protected String sort;
-    protected String filter;
+    private int page;
+    private int pageSize;
+    private String order;
+    private String sort;
+    private String filter;
 
     public abstract String buildEndPoint();
 
